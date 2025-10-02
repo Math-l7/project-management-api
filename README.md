@@ -1,66 +1,84 @@
-🗂 Project Management API
+# 🗂 PROJECT MANAGEMENT API
 
-API RESTful desenvolvida em Spring Boot para gerenciar usuários, projetos, tarefas, mensagens e notificações em tempo real, com autenticação via JWT e controle de acesso com Spring Security. Inspirada em ferramentas de gerenciamento de projetos como Trello.
+API RESTful desenvolvida em **Spring Boot** para gerenciar **usuários, projetos, tarefas, mensagens e notificações em tempo real**, com autenticação via **JWT** e controle de acesso com **Spring Security**. Inspirada em ferramentas de gerenciamento de projetos como **Trello**.
 
-🚀 Tecnologias
+---
 
-Java 21
+## 🚀 Tecnologias
 
-Spring Boot 3
+- **Java 21**  
+- **Spring Boot 3**  
+- **Spring Security + JWT**  
+- **Spring Data JPA**  
+- **PostgreSQL**  
+- **Maven**  
+- **WebSocket + SSE** (mensagens e notificações em tempo real)  
+- **JUnit 5 + Mockito** (testes unitários)  
+- **Swagger/OpenAPI**
 
-Spring Security + JWT
+---
 
-Spring Data JPA
+## 🔑 Funcionalidades
 
-PostgreSQL
+### Usuários
+- Cadastro, login e atualização  
+- Alteração de senha  
+- Gerenciamento de roles (**ADMIN/CLIENTE**)  
 
-Maven
+### Projetos
+- Criação, atualização e exclusão  
+- Gerenciamento de status  
+- Associação de usuários  
 
-WebSocket + SSE (mensagens e notificações em tempo real)
+### Tarefas
+- Criação, atualização e exclusão  
+- Alteração de status  
+- Atribuição a usuários  
 
-JUnit 5 + Mockito (testes unitários)
+### Mensagens
+- Envio, leitura e exclusão em tempo real via **WebSocket**  
 
-Swagger/OpenAPI
+### Notificações
+- Envio e leitura em tempo real via **SSE**  
+- Histórico por usuário  
 
-🔑 Funcionalidades
+### Segurança
+- Login com **JWT**  
+- Endpoints protegidos por **roles**  
+- Autenticação e autorização
 
-Usuários: cadastro, login, atualização, alteração de senha e gerenciamento de roles (ADMIN/CLIENTE).
+---
 
-Projetos: criação, atualização, exclusão, gerenciamento de status e associação de usuários.
+## 📂 Estrutura de Pacotes
 
-Tarefas: criação, atualização, exclusão, alteração de status e atribuição a usuários.
-
-Mensagens: envio, leitura e exclusão em tempo real via WebSocket.
-
-Notificações: envio e leitura em tempo real via SSE, com histórico por usuário.
-
-Segurança: login com JWT, endpoints protegidos por roles, autenticação e autorização.
-
-📂 Estrutura de Pacotes
 com.matheusluizroza.project_management_api
-┣ 📂 config        → Configurações de segurança e Swagger
-┣ 📂 controller    → Endpoints REST e WebSocket
-┣ 📂 dto           → Objetos de transferência de dados
-┣ 📂 enums         → Enumerações de status e roles
-┣ 📂 filter        → Filtros JWT
-┣ 📂 model         → Entidades JPA
-┣ 📂 repository    → Repositórios Spring Data JPA
-┣ 📂 service       → Lógica de negócio
+┣ 📂 config → Configurações de segurança e Swagger
+┣ 📂 controller → Endpoints REST e WebSocket
+┣ 📂 dto → Objetos de transferência de dados
+┣ 📂 enums → Enumerações de status e roles
+┣ 📂 filter → Filtros JWT
+┣ 📂 model → Entidades JPA
+┣ 📂 repository → Repositórios Spring Data JPA
+┣ 📂 service → Lógica de negócio
 ┗ ProjectManagementApiApplication.java
 
-📖 Documentação Swagger
 
-Após rodar a aplicação, acesse:
-👉 http://localhost:8080/swagger-ui.html
+## 📖 Documentação Swagger
 
-🧪 Testes
+Após rodar a aplicação, acesse:  
+👉 [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
-Testes unitários e de integração utilizando:
+---
 
-JUnit 5
+## 🧪 Testes
 
-Mockito
+Testes unitários e de integração utilizando:  
 
-👨‍💻 Autor
+- **JUnit 5**  
+- **Mockito**
 
-Matheus Luiz (Math-l7) 
+---
+
+## 👨‍💻 Autor
+
+**Matheus Luiz (Math-l7)**  
