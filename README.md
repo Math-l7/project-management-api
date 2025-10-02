@@ -38,16 +38,15 @@ Segurança: login com JWT, endpoints protegidos por roles, autenticação e auto
 
 📂 Estrutura de Pacotes
 com.matheusluizroza.project_management_api
-┣ 📂 config             → Configurações de segurança e Swagger
-┣ 📂 controller         → Endpoints REST e WebSocket
-┣ 📂 dto                → Objetos de transferência de dados
-┣ 📂 enums              → Enumerações de status e roles
-┣ 📂 filter             → Filtros JWT
-┣ 📂 model              → Entidades JPA
-┣ 📂 repository         → Repositórios Spring Data JPA
-┣ 📂 service            → Lógica de negócio
+┣ 📂 config        → Configurações de segurança e Swagger
+┣ 📂 controller    → Endpoints REST e WebSocket
+┣ 📂 dto           → Objetos de transferência de dados
+┣ 📂 enums         → Enumerações de status e roles
+┣ 📂 filter        → Filtros JWT
+┣ 📂 model         → Entidades JPA
+┣ 📂 repository    → Repositórios Spring Data JPA
+┣ 📂 service       → Lógica de negócio
 ┗ ProjectManagementApiApplication.java
-
 
 📖 Documentação Swagger
 
@@ -64,5 +63,4 @@ Mockito
 
 👨‍💻 Autor
 
-Matheus Luiz (Math-l7)
-GitHub
+Matheus Luiz (Math-l7) 
