@@ -61,7 +61,7 @@ public class UserService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED,
                         "Usuário não autenticado no contexto."));
     }
-    //
+    
 
     @Transactional
     public UserReturnDTO registerUser(UserInputDTO user) {

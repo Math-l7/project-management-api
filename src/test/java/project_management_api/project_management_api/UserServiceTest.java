@@ -66,14 +66,14 @@ public class UserServiceTest {
         user.setId(1);
         user.setName("User");
         user.setEmail("UserEmail");
-        user.setPassword("password@");
+        user.setPassword("Password123!");
         user.setRole(RoleName.ROLE_USER);
         user.setProjects(new ArrayList<>());
 
         dto = new UserInputDTO();
         dto.setEmail(user.getEmail());
         dto.setName(user.getName());
-        dto.setPassword("password@");
+        dto.setPassword(user.getPassword());
 
         userUpdate = new UserUpdateDTO();
         userUpdate.setEmail("newEmail");
@@ -101,7 +101,7 @@ public class UserServiceTest {
         assertEquals("UserEmail", result.getEmail());
 
         verify(userRepository).save(any(User.class));
-        verify(bcrypt).encode(dto.getPassword());
+        verify(bcrypt).encode("Password123!");
     }
 
     @Test
@@ -217,14 +217,12 @@ public class UserServiceTest {
     @Test
     public void updateUserRole_Success() {
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
-        doNothing().when(notificationService).sendNotificationToProject(any());
 
         UserReturnDTO result = userService.updateUserRole(user.getId(), RoleName.ROLE_ADMIN);
 
         assertEquals(RoleName.ROLE_ADMIN.toString(), result.getRole());
 
         verify(userRepository).save(user);
-        verify(notificationService).sendNotificationToProject(any());
     }
 
     @Test

@@ -29,7 +29,7 @@ public class NotificationService {
         private final NotificationRepository notificationRepository;
         private final UserRepository userRepository;
         private final ProjectRepository projectRepository;
-        private final SseController sseController; // Mantido, pois é o responsável pela tecnologia SSE
+        private final SseController sseController; 
         private final UserService userService;
 
         public NotificationService(NotificationRepository notificationRepository, UserRepository userRepository,

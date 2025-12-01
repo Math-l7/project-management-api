@@ -5,4 +5,4 @@ target/
 .settings/
 *.iml
 *.log
-.env
+application-prod.properties

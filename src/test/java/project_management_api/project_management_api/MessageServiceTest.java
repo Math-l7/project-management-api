@@ -64,6 +64,7 @@ public class MessageServiceTest {
 
     @BeforeEach
     void setUp() {
+
         user = new User();
         user.setId(1);
         user.setName("Matheus");
@@ -167,7 +168,6 @@ public class MessageServiceTest {
     @Test
     public void search_WhenProjectNotFound() {
         when(projectRepository.findById(project.getId())).thenReturn(Optional.empty());
-        when(userService.getAuthenticatedUser()).thenReturn(user);
 
         assertThrows(ResponseStatusException.class,
                 () -> messageService.search(project.getId(), "Mensagem"));
@@ -197,7 +197,6 @@ public class MessageServiceTest {
     @Test
     public void getMessageById_WhenMessageNotFound() {
         when(messageRepository.findById(message.getId())).thenReturn(Optional.empty());
-        when(userService.getAuthenticatedUser()).thenReturn(user);
 
         assertThrows(ResponseStatusException.class, () -> messageService.getMessageById(message.getId()));
     }
@@ -236,7 +235,6 @@ public class MessageServiceTest {
     @Test
     public void deleteMessage_WhenMessageNotFound() {
         when(messageRepository.findById(message.getId())).thenReturn(Optional.empty());
-        when(userService.getAuthenticatedUser()).thenReturn(user);
 
         assertThrows(ResponseStatusException.class, () -> messageService.deleteMessage(message.getId()));
     }

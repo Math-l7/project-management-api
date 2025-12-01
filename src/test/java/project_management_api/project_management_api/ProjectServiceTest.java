@@ -95,6 +95,7 @@ public class ProjectServiceTest {
     public void createProject_Success() {
         when(projectRepository.existsByName(projectInput.getName())).thenReturn(false);
         when(userService.getAuthenticatedUser()).thenReturn(userCreator);
+        when(projectRepository.save(any(Project.class))).thenReturn(project);
 
         ProjectReturnDTO result = projectService.createProject(projectInput);
 
@@ -117,6 +118,7 @@ public class ProjectServiceTest {
     public void updateProject_Success() {
         when(projectRepository.findById(project.getId())).thenReturn(Optional.of(project));
         when(userService.getAuthenticatedUser()).thenReturn(userCreator);
+        when(projectRepository.save(any(Project.class))).thenReturn(project);
 
         ProjectReturnDTO result = projectService.updateProject(projectUpdate, project.getId());
 
@@ -139,11 +141,12 @@ public class ProjectServiceTest {
     public void updateStatusProject_Success() {
         when(projectRepository.findById(project.getId())).thenReturn(Optional.of(project));
         when(userService.getAuthenticatedUser()).thenReturn(userCreator);
+        when(projectRepository.save(any(Project.class))).thenReturn(project);
 
         ProjectReturnDTO result = projectService.updateStatusProject(project.getId(),
                 ProjectStatus.COMPLETED);
 
-        assertEquals(ProjectStatus.COMPLETED.toString(), result.getStatus());
+        assertEquals(ProjectStatus.COMPLETED, result.getStatus());
 
         verify(projectRepository).save(any(Project.class));
         verify(notificationService).sendNotificationToProject(any(NotificationInputDTOToProject.class));
@@ -218,6 +221,7 @@ public class ProjectServiceTest {
     public void addUserToProject_Success() {
         when(projectRepository.findById(project.getId())).thenReturn(Optional.of(project));
         when(userRepository.findById(anotherUser.getId())).thenReturn(Optional.of(anotherUser));
+        when(projectRepository.save(any(Project.class))).thenReturn(project);
 
         ProjectReturnDTO result = projectService.addUserToProject(project.getId(), anotherUser.getId());
 
@@ -249,6 +253,7 @@ public class ProjectServiceTest {
     public void removeUserFromProject_Success() {
         project.getUsers().add(anotherUser);
         anotherUser.getProjects().add(project);
+        when(projectRepository.save(any(Project.class))).thenReturn(project);
 
         when(projectRepository.findById(project.getId())).thenReturn(Optional.of(project));
         when(userRepository.findById(anotherUser.getId())).thenReturn(Optional.of(anotherUser));

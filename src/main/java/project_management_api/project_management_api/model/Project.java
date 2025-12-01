@@ -36,14 +36,12 @@ public class Project {
     @Enumerated(EnumType.STRING)
     private ProjectStatus status = ProjectStatus.ACTIVE;
 
-    // relacionamento com users (MEMBROS) (FK) many to many
     @ManyToMany
     @JoinTable(name = "user_project", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
-    // relacionamento com tasks (FK) one to many
     @OneToMany(mappedBy = "projectOwner")
-    private List<Task> tasks;
+    private List<Task> tasks = new ArrayList<>();
 
     @OneToMany(mappedBy = "project")
     private List<Message> messages = new ArrayList<>();

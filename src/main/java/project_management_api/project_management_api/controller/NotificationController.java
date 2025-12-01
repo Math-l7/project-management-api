@@ -11,18 +11,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
 import project_management_api.project_management_api.dto.NotificationReturnDTO;
 import project_management_api.project_management_api.service.NotificationService;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/notifications")
 public class NotificationController {
 
     private final NotificationService notificationService;
-
-    public NotificationController(NotificationService notificationService) {
-        this.notificationService = notificationService;
-    }
 
     @GetMapping("/me")
     public ResponseEntity<List<NotificationReturnDTO>> getNotificationsByUser() {

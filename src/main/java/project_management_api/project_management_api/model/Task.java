@@ -32,7 +32,6 @@ public class Task {
     @Column(nullable = false)
     private TaskStatus status = TaskStatus.TO_DO;
 
-    // relacionamento project(FK) many to one
     @ManyToOne
     @JoinColumn(name = "project_id", nullable = false)
     private Project projectOwner;

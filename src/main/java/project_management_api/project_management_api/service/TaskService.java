@@ -80,12 +80,10 @@ public class TaskService {
 
         taskRepository.save(task);
 
-        // 1. Notificação para TODOS os membros do projeto (Visibilidade)
         notificationService.sendNotificationToProject(new NotificationInputDTOToProject(
                 "Nova Task criada: '" + task.getTitle() + "' no projeto " + project.getName(),
                 projectId));
 
-        // 2. Notificação Específica para o Responsável (Responsabilidade)
         if (task.getTaskOwner() != null) {
             notificationService.sendNotificationToUser(new NotificationInputDTOToUser(
                     "Você foi atribuído à nova task: '" + task.getTitle() + "'",

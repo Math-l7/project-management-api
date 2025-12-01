@@ -8,33 +8,30 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
+import lombok.RequiredArgsConstructor;
 import project_management_api.project_management_api.dto.MessageInputDTO;
 import project_management_api.project_management_api.dto.MessageReturnDTO;
 import project_management_api.project_management_api.service.MessageService;
 
 @Controller
+@RequiredArgsConstructor
 public class WebSocketController {
 
     private final MessageService messageService;
-
-    public WebSocketController(MessageService messageService) {
-        this.messageService = messageService;
-    }
 
     @MessageMapping("/project/{projectId}/send")
     @SendTo("/topic/project/{projectId}")
     public MessageReturnDTO sendMessage(@DestinationVariable Integer projectId,
             @Payload MessageInputDTO messageDto,
-            Principal principal) { // <-- ESSENCIAL: Garante que o usuário está autenticado
+            Principal principal) {
 
-        // O Service AINDA pode usar userService.getAuthenticatedUser() aqui dentro.
         return messageService.sendMessage(projectId, messageDto);
     }
 
     @MessageMapping("/message/{messageId}/markRead")
     @SendTo("/topic/message/{messageId}")
     public MessageReturnDTO markRead(@DestinationVariable Integer messageId,
-            Principal principal) { // <-- ESSENCIAL
+            Principal principal) {
 
         return messageService.markRead(messageId);
     }
@@ -42,7 +39,7 @@ public class WebSocketController {
     @MessageMapping("/message/{messageId}/delete")
     @SendTo("/topic/message/{messageId}/deleted")
     public void delete(@DestinationVariable Integer messageId,
-            Principal principal) { // <-- ESSENCIAL
+            Principal principal) {
 
         messageService.deleteMessage(messageId);
     }

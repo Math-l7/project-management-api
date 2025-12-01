@@ -45,16 +45,14 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private RoleName role = RoleName.ROLE_USER;
 
-    // relacionamento com projetos (FK) //many to many
     @ManyToMany(mappedBy = "users")
-    private List<Project> projects;
+    private List<Project> projects = new ArrayList<>();
 
     @OneToMany(mappedBy = "taskOwner")
     private List<Task> tasks = new ArrayList<>();
 
-    // relacionamento com Notifications (FK) //One to many
     @OneToMany(mappedBy = "userDestin")
-    private List<Notification> notifications;
+    private List<Notification> notifications = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

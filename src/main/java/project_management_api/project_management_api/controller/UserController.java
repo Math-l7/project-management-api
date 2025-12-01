@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
 import project_management_api.project_management_api.dto.UserInputDTO;
 import project_management_api.project_management_api.dto.UserLoginReturnDTO;
 import project_management_api.project_management_api.dto.UserReturnDTO;
@@ -24,14 +25,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/users")
 public class UserController {
 
     private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping()
     public ResponseEntity<UserReturnDTO> registerUser(@RequestBody UserInputDTO user) {

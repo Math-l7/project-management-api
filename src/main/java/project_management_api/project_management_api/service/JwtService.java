@@ -21,7 +21,6 @@ public class JwtService {
         return Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    // 🔹 Gerar token
     public String generateToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
@@ -31,12 +30,10 @@ public class JwtService {
                 .compact();
     }
 
-    // 🔹 Extrair username do token
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    // 🔹 Extrair qualquer claim
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
@@ -50,7 +47,6 @@ public class JwtService {
                 .getBody();
     }
 
-    // 🔹 Verificar se token expirou
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
@@ -59,7 +55,6 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    // 🔹 Validar token
     public Boolean validateToken(String token, String username) {
         final String extractedUsername = extractUsername(token);
         return (extractedUsername.equals(username) && !isTokenExpired(token));

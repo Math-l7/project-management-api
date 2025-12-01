@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
 import project_management_api.project_management_api.dto.TaskInputDTO;
 import project_management_api.project_management_api.dto.TaskReturnDTO;
 import project_management_api.project_management_api.dto.TaskUpdateDTO;
@@ -22,14 +23,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/tasks")
 public class TaskController {
 
     private final TaskService taskService;
-
-    public TaskController(TaskService taskService) {
-        this.taskService = taskService;
-    }
 
     @PostMapping("/projects/{projectId}")
     public ResponseEntity<TaskReturnDTO> createTask(@RequestBody TaskInputDTO task, @PathVariable Integer projectId) {

@@ -9,6 +9,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,6 +72,7 @@ public class NotificationServiceTest {
         user = new User();
         user.setId(1);
         user.setName("Matheus");
+        user.setNotifications(new ArrayList<>());
 
         anotherUser = new User();
         anotherUser.setId(2);
@@ -160,7 +162,7 @@ public class NotificationServiceTest {
 
         NotificationReturnDTO result = notificationService.markRead(notification.getId());
 
-        assertEquals(NotificationStatus.READ.toString(), result.getStatus());
+        assertEquals(NotificationStatus.READ, result.getStatus());
         verify(notificationRepository).save(any(Notification.class));
     }
 
@@ -201,8 +203,8 @@ public class NotificationServiceTest {
         List<NotificationReturnDTO> result = notificationService.markAllRead();
 
         assertEquals(2, result.size());
-        assertEquals(NotificationStatus.READ.toString(), result.get(0).getStatus());
-        assertEquals(NotificationStatus.READ.toString(), result.get(1).getStatus());
+        assertEquals(NotificationStatus.READ, result.get(0).getStatus());
+        assertEquals(NotificationStatus.READ, result.get(1).getStatus());
         verify(notificationRepository).saveAll(anyList());
     }
 
