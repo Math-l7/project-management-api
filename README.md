@@ -1,72 +1,53 @@
 # 🗂 PROJECT MANAGEMENT API
 
-API RESTful desenvolvida em **Spring Boot** para gerenciar **usuários, projetos, tarefas, mensagens e notificações em tempo real**, com autenticação via **JWT** e controle de acesso com **Spring Security**. Inspirada em ferramentas de gerenciamento de projetos como **Trello**.
+Solução de API RESTful, inspirada em ferramentas como Trello, desenvolvida com **Spring Boot 3** para gerenciar o ciclo de vida de projetos e tarefas. O projeto prioriza a **segurança** (via Spring Security e JWT) e a **comunicação em tempo real** (WebSocket e SSE) para notificações e mensagens.
 
 ---
 
-## 🏗️ Arquitetura e Estratégia de Deploy
+## 🏗️ Engenharia de DevOps e Qualidade
 
-Este projeto é totalmente **containerizado**, demonstrando proficiência em **Docker** e **Docker Compose** para orquestração de ambientes multi-serviço (API + DB).
+Este projeto demonstra proficiência em práticas de **Desenvolvimento e Operações (DevOps)**, focando em portabilidade, segurança e eficiência no ambiente de desenvolvimento e produção.
 
-* **Containerização Segura:** A imagem da API foi criada com um **`Dockerfile` limpo e seguro**, seguindo as melhores práticas (uso de usuário **não-root** e ausência de segredos *hardcoded*).
-* **Orquestração Plug-and-Play:** O **`docker-compose.yml`** configura o ambiente completo, subindo a **API Spring Boot** e o **Banco de Dados PostgreSQL** com um único comando, utilizando **`healthcheck`** e **`depends_on`** para garantir a ordem e a disponibilidade dos serviços.
-* **Segurança de Segredos:** Todas as credenciais (chave JWT, senha do DB) são injetadas via **Variáveis de Ambiente**, garantindo que nenhum dado sensível esteja exposto no código ou na imagem Docker.
-
----
-
-## 🚀 Tecnologias
-
-- **Java 21**  
-- **Spring Boot 3**  
-- **Spring Security + JWT**  
-- **Spring Data JPA**  
-- **PostgreSQL**  
-- **Maven**  
-- **Docker** e **Docker Compose** (Orquestração e Deploy)
-- **WebSocket + SSE** (mensagens e notificações em tempo real)  
-- **JUnit 5 + Mockito** (testes unitários)  
-- **Swagger/OpenAPI**
+- **Containerização Plug-and-Play:** Uso de **Docker** e **Docker Compose** para orquestrar o ambiente multi-serviço (API + DB PostgreSQL) com um único comando.
+- **Imagens Seguras e Otimizadas:** A imagem da API é construída usando **`Dockerfile` limpo e seguro** (com usuário não-root) e otimização de tamanho via **Multi-Stage Build**.
+- **Segurança de Credenciais Prioritária:**
+  - **Separação de Segredos:** Credenciais sensíveis (chaves JWT, senhas do DB) são injetadas **exclusivamente via Variáveis de Ambiente** (`.env`).
+  - **Controle de Versão:** Arquivos de configuração de ambiente (`application-dev.properties`, `.env`) são ativamente **ignorados** pelo Git, prevenindo a exposição acidental de dados no repositório público.
+- **Orquestração Robusta:** O **`docker-compose.yml`** utiliza mecanismos como **`healthcheck`** e **`depends_on`** para garantir que os serviços (como o DB) estejam prontos e íntegros antes da inicialização da API.
 
 ---
 
-## 🔑 Funcionalidades
+## 🚀 Tecnologias Essenciais
 
-### Usuários
-- Cadastro, login e atualização  
-- Alteração de senha  
-- Gerenciamento de roles (**ADMIN/CLIENTE**)  
+| Categoria            | Tecnologias Utilizadas                                            |
+| :------------------- | :---------------------------------------------------------------- |
+| **Backend Core**     | **Java 21**, **Spring Boot 3**, Maven                             |
+| **Segurança**        | **Spring Security** (Autenticação), **JWT** (JSON Web Tokens)     |
+| **Persistência**     | **Spring Data JPA**, **PostgreSQL**                               |
+| **Comunicação RT**   | **WebSocket** (Mensagens), **SSE** (Notificações em tempo real)   |
+| **Deploy/Qualidade** | **Docker**, **Docker Compose**, JUnit 5, Mockito, Swagger/OpenAPI |
 
-### Projetos
-- Criação, atualização e exclusão  
-- Gerenciamento de status  
-- Associação de usuários  
+---
 
-### Tarefas
-- Criação, atualização e exclusão  
-- Alteração de status  
-- Atribuição a usuários  
+## 🔑 Funcionalidades Chave
 
-### Mensagens
-- Envio, leitura e exclusão em tempo real via **WebSocket**  
-
-### Notificações
-- Envio e leitura em tempo real via **SSE**  
-- Histórico por usuário  
-
-### Segurança
-- Login com **JWT**  
-- Endpoints protegidos por **roles**  
-- Autenticação e autorização
+- **Usuários:** Cadastro, login, atualização, gerenciamento de roles (**ADMIN/CLIENTE**).
+- **Projetos:** Criação, gerenciamento de status e associação dinâmica de usuários.
+- **Tarefas:** Criação, atualização de status e atribuição a usuários.
+- **Mensagens:** Envio, leitura e exclusão em tempo real via **WebSocket**.
+- **Notificações:** Envio e histórico em tempo real via **SSE (Server-Sent Events)**.
+- **Segurança:** Endpoints protegidos por **roles** e fluxo de autenticação e autorização completo.
 
 ---
 
 ## 🐳 Como Rodar a Aplicação (Setup Plug-and-Play)
 
-Graças à containerização, o ambiente de desenvolvimento completo (API + DB) pode ser inicializado com um único comando.
+O ambiente de desenvolvimento completo (API + DB PostgreSQL) é inicializado através do Docker Compose.
 
 ### Pré-requisitos
+
 1.  Ter o **Docker** e o **Docker Compose** instalados.
-2.  Criar o arquivo **`.env`** na raiz do projeto com os valores necessários (este arquivo **NÃO** deve ser commitado no Git):
+2.  Criar o arquivo **`.env`** na raiz do projeto para carregar as credenciais (este arquivo **NÃO** deve ser commitado):
 
     ```env
     DB_USERNAME=
@@ -75,6 +56,7 @@ Graças à containerização, o ambiente de desenvolvimento completo (API + DB) 
     ```
 
 ### Execução
+
 Na raiz do projeto, execute:
 
 ```bash
@@ -96,20 +78,21 @@ com.matheusluizroza.project_management_api
 
 ## 📖 Documentação Swagger
 
-Após rodar a aplicação, acesse:  
+Após rodar a aplicação, acesse:
 👉 [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
 ---
 
 ## 🧪 Testes
 
-Testes unitários e de integração utilizando:  
+Testes unitários e de integração utilizando:
 
-- **JUnit 5**  
+- **JUnit 5**
 - **Mockito**
 
 ---
 
 ## 👨‍💻 Autor
 
-**Matheus Luiz (Math-l7)**  
+**Matheus Luiz (Math-l7)**
+```
